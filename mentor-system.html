@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard mentor untuk membimbing murid belajar dan menghafal Al-Qur'an di AyatIfy.">
+  <title>Mentor System &mdash; AyatIfy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="assets/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="assets/style.css" rel="stylesheet">
+  <link href="assets/dashboard.css" rel="stylesheet">
+  <link href="assets/mentor-system.css" rel="stylesheet">
+</head>
+<body class="learning-dashboard mentor-dashboard" data-theme="light">
+  <header class="dashboard-topbar">
+    <div class="dashboard-wrap dashboard-topbar-inner">
+      <a class="hw-logo dashboard-logo" href="index.html#home" aria-label="AyatIfy beranda">
+        <span class="hw-logo-mark"><i class="bi bi-book-half"></i></span>
+        Ayat<span class="dot">Ify</span>
+      </a>
+      <div class="dashboard-topbar-actions">
+        <div class="dashboard-clock" aria-label="Tanggal dan waktu saat ini">
+          <i class="bi bi-calendar3" aria-hidden="true"></i>
+          <div><span id="mentorDate">Memuat tanggal...</span><strong id="mentorTime">--:--:--</strong></div>
+        </div>
+        <button class="dashboard-theme-toggle" id="mentorThemeToggle" type="button" aria-pressed="false">
+          <i class="bi bi-moon-stars" aria-hidden="true"></i><span>Mode gelap</span>
+        </button>
+        <a class="dashboard-back-link" href="index.html#learn"><i class="bi bi-arrow-left" aria-hidden="true"></i> Kembali ke Learn</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-wrap dashboard-main">
+    <div id="mentorNotice" class="dashboard-notice" role="status" aria-live="polite" hidden></div>
+
+    <section class="dashboard-welcome mentor-welcome" aria-labelledby="mentorWelcomeTitle">
+      <div class="dashboard-welcome-copy">
+        <span class="dashboard-eyebrow"><i class="bi bi-person-check-fill" aria-hidden="true"></i> MENTOR SYSTEM</span>
+        <h1 id="mentorWelcomeTitle">Assalamu'alaikum, <span id="mentorName">Ustaz Ahmad</span></h1>
+        <p class="dashboard-motivation">Dampingi setiap langkah belajar dengan arahan yang baik, terukur, dan penuh semangat.</p>
+        <div class="mentor-welcome-chips">
+          <span><i class="bi bi-mortarboard" aria-hidden="true"></i> Bimbingan terarah</span>
+          <span><i class="bi bi-heart" aria-hidden="true"></i> Tumbuh bersama</span>
+        </div>
+      </div>
+      <div class="dashboard-welcome-art mentor-welcome-art" aria-hidden="true">
+        <span class="welcome-orbit welcome-orbit--one"></span>
+        <span class="welcome-orbit welcome-orbit--two"></span>
+        <span class="mentor-avatar"><i class="bi bi-person-check-fill"></i></span>
+        <span class="welcome-spark welcome-spark--one"><i class="bi bi-stars"></i></span>
+      </div>
+    </section>
+
+    <div class="dashboard-grid mentor-grid">
+      <section class="dashboard-panel mentor-overview-panel" aria-labelledby="overviewTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">RINGKASAN BIMBINGAN</span><h2 id="overviewTitle">Mentor Overview</h2></div>
+          <span class="dashboard-panel-icon"><i class="bi bi-clipboard2-data" aria-hidden="true"></i></span>
+        </div>
+        <div class="mentor-overview-metrics">
+          <div class="mentor-metric"><span class="mentor-metric-icon"><i class="bi bi-people" aria-hidden="true"></i></span><strong id="overviewStudents">0</strong><span>Murid dibimbing</span></div>
+          <div class="mentor-metric"><span class="mentor-metric-icon"><i class="bi bi-collection" aria-hidden="true"></i></span><strong id="overviewGroups">0</strong><span>Kelompok belajar</span></div>
+          <div class="mentor-metric"><span class="mentor-metric-icon"><i class="bi bi-inbox" aria-hidden="true"></i></span><strong id="overviewSubmissions">0</strong><span>Setoran menunggu</span></div>
+          <div class="mentor-metric"><span class="mentor-metric-icon"><i class="bi bi-calendar-check" aria-hidden="true"></i></span><strong id="overviewAttendance">0%</strong><span>Kehadiran hari ini</span></div>
+        </div>
+      </section>
+
+      <section class="dashboard-panel mentor-students-panel" aria-labelledby="studentsTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">DAFTAR BIMBINGAN</span><h2 id="studentsTitle">My Students</h2></div>
+          <button class="dashboard-icon-button" id="studentFormToggle" type="button" aria-label="Tambah murid" aria-controls="studentForm" aria-expanded="false"><i class="bi bi-person-plus" aria-hidden="true"></i></button>
+        </div>
+        <ul class="mentor-student-list" id="studentList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="studentForm" hidden>
+          <div class="mentor-form-grid">
+            <div><label for="studentNameInput">Nama murid</label><input id="studentNameInput" maxlength="60" required placeholder="Nama lengkap murid"></div>
+            <div><label for="studentGroupInput">Kelompok belajar</label><select id="studentGroupInput" required></select></div>
+          </div>
+          <div class="dashboard-form-actions">
+            <button class="dashboard-button dashboard-button--small" type="submit">Tambah murid</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel mentor-groups-panel" aria-labelledby="groupsTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">RUANG BELAJAR</span><h2 id="groupsTitle">Learning Groups</h2></div>
+          <button class="dashboard-icon-button" id="groupFormToggle" type="button" aria-label="Buat kelompok belajar" aria-controls="groupForm" aria-expanded="false"><i class="bi bi-plus-lg" aria-hidden="true"></i></button>
+        </div>
+        <ul class="mentor-group-list" id="groupList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="groupForm" hidden>
+          <label for="groupNameInput">Nama kelompok baru</label>
+          <div class="dashboard-form-row"><input id="groupNameInput" maxlength="70" required placeholder="Contoh: Tahfidz Al-Kahfi"><button class="dashboard-button dashboard-button--small" type="submit">Buat kelompok</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel mentor-progress-panel" aria-labelledby="progressTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">PERKEMBANGAN HAFALAN</span><h2 id="progressTitle">Student Progress</h2></div>
+          <span class="dashboard-panel-icon"><i class="bi bi-graph-up-arrow" aria-hidden="true"></i></span>
+        </div>
+        <div class="mentor-table-wrap">
+          <table class="mentor-table">
+            <thead><tr><th scope="col">Murid</th><th scope="col">Kelompok</th><th scope="col">Progres</th><th scope="col">Capaian</th></tr></thead>
+            <tbody id="progressTableBody"></tbody>
+          </table>
+        </div>
+        <form class="dashboard-inline-form" id="progressForm">
+          <h3>Perbarui progres hafalan</h3>
+          <div class="mentor-progress-form-grid">
+            <div><label for="progressStudentInput">Murid</label><select id="progressStudentInput" required></select></div>
+            <div><label for="progressJuzInput">Juz</label><input id="progressJuzInput" type="number" min="0" max="30" required></div>
+            <div><label for="progressSurahInput">Surah</label><input id="progressSurahInput" type="number" min="0" max="114" required></div>
+            <div><label for="progressAyatInput">Ayat</label><input id="progressAyatInput" type="number" min="0" max="6236" required></div>
+          </div>
+          <button class="dashboard-button dashboard-button--small" type="submit">Simpan progres</button>
+        </form>
+      </section>
+
+      <section class="dashboard-panel mentor-submissions-panel" aria-labelledby="submissionsTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">SETORAN MASUK</span><h2 id="submissionsTitle">Submission Review</h2></div>
+          <span class="mentor-count-badge" id="pendingSubmissionBadge">0 menunggu</span>
+        </div>
+        <ul class="mentor-submission-list" id="submissionList" aria-live="polite"></ul>
+      </section>
+
+      <section class="dashboard-panel mentor-assignments-panel" aria-labelledby="assignmentsTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">ARAHAN BELAJAR</span><h2 id="assignmentsTitle">Assignments</h2></div>
+          <button class="dashboard-icon-button" id="assignmentFormToggle" type="button" aria-label="Buat tugas belajar" aria-controls="assignmentForm" aria-expanded="false"><i class="bi bi-journal-plus" aria-hidden="true"></i></button>
+        </div>
+        <ul class="mentor-assignment-list" id="assignmentList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="assignmentForm" hidden>
+          <div class="mentor-form-grid">
+            <div><label for="assignmentTitleInput">Nama tugas</label><input id="assignmentTitleInput" maxlength="100" required placeholder="Contoh: Murajaah Al-Mulk ayat 1-10"></div>
+            <div><label for="assignmentTypeInput">Jenis tugas</label><select id="assignmentTypeInput"><option>Membaca</option><option>Menghafal</option><option>Murajaah</option></select></div>
+            <div><label for="assignmentDueInput">Batas waktu</label><input id="assignmentDueInput" type="date" required></div>
+          </div>
+          <div class="dashboard-form-actions">
+            <button class="dashboard-button dashboard-button--small" type="submit">Bagikan tugas</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel mentor-schedule-panel" aria-labelledby="scheduleTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">AGENDA BIMBINGAN</span><h2 id="scheduleTitle">Learning Schedule</h2></div>
+          <button class="dashboard-icon-button" id="scheduleFormToggle" type="button" aria-label="Tambah jadwal pembelajaran" aria-controls="scheduleForm" aria-expanded="false"><i class="bi bi-calendar-plus" aria-hidden="true"></i></button>
+        </div>
+        <ul class="dashboard-item-list" id="scheduleList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="scheduleForm" hidden>
+          <div class="mentor-form-grid">
+            <div><label for="scheduleTitleInput">Nama kegiatan</label><input id="scheduleTitleInput" maxlength="100" required placeholder="Contoh: Setoran hafalan"></div>
+            <div><label for="scheduleGroupInput">Kelompok</label><select id="scheduleGroupInput" required></select></div>
+            <div><label for="scheduleDateInput">Tanggal</label><input id="scheduleDateInput" type="date" required></div>
+            <div><label for="scheduleTimeInput">Waktu</label><input id="scheduleTimeInput" type="time" required></div>
+          </div>
+          <div class="dashboard-form-actions">
+            <button class="dashboard-button dashboard-button--small" type="submit">Tambah jadwal</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel mentor-evaluation-panel" aria-labelledby="evaluationTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">CATATAN PEMBIMBING</span><h2 id="evaluationTitle">Evaluation &amp; Feedback</h2></div>
+          <span class="dashboard-panel-icon"><i class="bi bi-chat-square-heart" aria-hidden="true"></i></span>
+        </div>
+        <form class="dashboard-inline-form mentor-evaluation-form" id="evaluationForm">
+          <div class="mentor-form-grid">
+            <div><label for="evaluationStudentInput">Murid</label><select id="evaluationStudentInput" required></select></div>
+            <div><label for="evaluationRatingInput">Penilaian</label><select id="evaluationRatingInput"><option value="5">Sangat baik — 5</option><option value="4">Baik — 4</option><option value="3">Berkembang — 3</option><option value="2">Perlu latihan — 2</option><option value="1">Perlu pendampingan — 1</option></select></div>
+          </div>
+          <div><label for="evaluationFeedbackInput">Masukan untuk murid</label><textarea id="evaluationFeedbackInput" rows="3" maxlength="500" required placeholder="Tuliskan apresiasi dan langkah belajar berikutnya..."></textarea></div>
+          <button class="dashboard-button dashboard-button--small" type="submit">Simpan evaluasi</button>
+        </form>
+        <ul class="mentor-feedback-list" id="evaluationList" aria-live="polite"></ul>
+      </section>
+
+      <section class="dashboard-panel mentor-attendance-panel" aria-labelledby="attendanceTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">KEHADIRAN BIMBINGAN</span><h2 id="attendanceTitle">Attendance</h2></div>
+          <span class="dashboard-panel-icon"><i class="bi bi-person-check" aria-hidden="true"></i></span>
+        </div>
+        <form class="mentor-attendance-form" id="attendanceForm">
+          <label for="attendanceDateInput">Tanggal absensi</label>
+          <input id="attendanceDateInput" type="date" required>
+          <div class="mentor-attendance-list" id="attendanceList"></div>
+          <button class="dashboard-button dashboard-button--small" type="submit">Simpan kehadiran</button>
+        </form>
+      </section>
+
+      <section class="dashboard-panel mentor-reports-panel" aria-labelledby="reportsTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">RINGKASAN PERKEMBANGAN</span><h2 id="reportsTitle">Performance Reports</h2></div>
+          <button class="dashboard-button dashboard-button--small" id="downloadReport" type="button"><i class="bi bi-download" aria-hidden="true"></i> Unduh laporan</button>
+        </div>
+        <div class="mentor-report-stats" id="reportStats"></div>
+        <ul class="mentor-report-list" id="reportStudentList"></ul>
+      </section>
+    </div>
+    <p class="dashboard-storage-note"><i class="bi bi-shield-lock" aria-hidden="true"></i> Data murid dan kegiatan tersimpan di browser ini; belum tersinkron dengan akun atau perangkat lain.</p>
+  </main>
+  <script src="assets/mentor-system.js"></script>
+</body>
+</html>

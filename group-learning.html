@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard belajar Al-Qur'an bersama komunitas AyatIfy.">
+  <title>Group Learning &mdash; AyatIfy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="assets/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="assets/style.css" rel="stylesheet">
+  <link href="assets/dashboard.css" rel="stylesheet">
+  <link href="assets/group-learning.css" rel="stylesheet">
+</head>
+<body class="learning-dashboard group-dashboard" data-theme="light">
+  <header class="dashboard-topbar">
+    <div class="dashboard-wrap dashboard-topbar-inner">
+      <a class="hw-logo dashboard-logo" href="index.html#home" aria-label="AyatIfy beranda">
+        <span class="hw-logo-mark"><i class="bi bi-book-half"></i></span>
+        Ayat<span class="dot">Ify</span>
+      </a>
+      <div class="dashboard-topbar-actions">
+        <div class="dashboard-clock" aria-label="Tanggal dan waktu saat ini">
+          <i class="bi bi-calendar3" aria-hidden="true"></i>
+          <div><span id="groupDate">Memuat tanggal...</span><strong id="groupTime">--:--:--</strong></div>
+        </div>
+        <button class="dashboard-theme-toggle" id="groupThemeToggle" type="button" aria-pressed="false">
+          <i class="bi bi-moon-stars" aria-hidden="true"></i><span>Mode gelap</span>
+        </button>
+        <a class="dashboard-back-link" href="index.html#learn"><i class="bi bi-arrow-left" aria-hidden="true"></i> Kembali ke Learn</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-wrap dashboard-main">
+    <div id="groupNotice" class="dashboard-notice" role="status" aria-live="polite" hidden></div>
+
+    <section class="dashboard-welcome group-welcome" aria-labelledby="groupWelcomeTitle">
+      <div class="dashboard-welcome-copy">
+        <span class="dashboard-eyebrow"><i class="bi bi-people-fill" aria-hidden="true"></i> GROUP LEARNING</span>
+        <h1 id="groupWelcomeTitle">Belajar bersama, bertumbuh bersama.</h1>
+        <p id="groupWelcomeText" class="dashboard-motivation">Saling menyemangati dalam perjalanan membaca dan menghafal Al-Qur'an.</p>
+        <div class="group-welcome-chips">
+          <span><i class="bi bi-person-hearts" aria-hidden="true"></i> Komunitas</span>
+          <span><i class="bi bi-chat-dots" aria-hidden="true"></i> Kolaborasi</span>
+          <span><i class="bi bi-calendar-heart" aria-hidden="true"></i> Konsisten</span>
+        </div>
+      </div>
+      <div class="dashboard-welcome-art group-welcome-art" aria-hidden="true">
+        <span class="welcome-orbit welcome-orbit--one"></span>
+        <span class="welcome-orbit welcome-orbit--two"></span>
+        <span class="group-avatar group-avatar--one"><i class="bi bi-person-fill"></i></span>
+        <span class="group-avatar group-avatar--two"><i class="bi bi-person-fill"></i></span>
+        <span class="group-avatar group-avatar--three"><i class="bi bi-person-fill"></i></span>
+        <span class="welcome-spark welcome-spark--one"><i class="bi bi-stars"></i></span>
+      </div>
+    </section>
+
+    <div class="dashboard-grid group-grid">
+      <section class="dashboard-panel group-overview-panel" aria-labelledby="groupOverviewTitle">
+        <div class="dashboard-panel-heading group-overview-heading">
+          <div>
+            <span class="dashboard-panel-kicker">RUANG BELAJAR BERSAMA</span>
+            <h2 id="groupOverviewTitle">Group Overview</h2>
+          </div>
+          <label class="group-switcher-label" for="groupSelect">Kelompok aktif</label>
+          <select class="group-select" id="groupSelect" aria-label="Pilih kelompok belajar"></select>
+        </div>
+        <div class="group-overview-content">
+          <div class="group-overview-copy">
+            <h3 id="activeGroupName">Memuat kelompok...</h3>
+            <p id="activeGroupDescription" class="dashboard-muted"></p>
+            <div class="group-overview-meta">
+              <span><i class="bi bi-people" aria-hidden="true"></i> <strong id="groupMemberCount">0</strong> anggota</span>
+              <span><i class="bi bi-calendar3" aria-hidden="true"></i> Aktif sejak <strong id="groupCreatedDate">-</strong></span>
+              <span id="currentRoleBadge" class="group-role-badge"></span>
+            </div>
+          </div>
+          <div class="group-invite-box">
+            <span class="dashboard-small-muted">KODE UNDANGAN</span>
+            <div><strong id="groupInviteCode">------</strong><button id="copyInviteCode" type="button" aria-label="Salin kode undangan"><i class="bi bi-copy" aria-hidden="true"></i></button></div>
+            <span class="dashboard-small-muted">Bagikan dengan anggota kelompok.</span>
+          </div>
+        </div>
+        <div class="group-toolbar">
+          <button class="dashboard-button dashboard-button--small" id="createGroupToggle" type="button" aria-controls="createGroupForm" aria-expanded="false"><i class="bi bi-plus-lg" aria-hidden="true"></i> Buat kelompok</button>
+          <button class="dashboard-quiet-button dashboard-button--small" id="joinGroupToggle" type="button" aria-controls="joinGroupForm" aria-expanded="false"><i class="bi bi-box-arrow-in-right" aria-hidden="true"></i> Gabung dengan kode</button>
+          <button class="dashboard-quiet-button dashboard-button--small" id="editGroupToggle" type="button" aria-controls="editGroupForm" aria-expanded="false"><i class="bi bi-pencil" aria-hidden="true"></i> Edit info</button>
+        </div>
+        <form class="dashboard-inline-form" id="createGroupForm" hidden>
+          <h3>Buat kelompok belajar</h3>
+          <div class="group-form-grid">
+            <div><label for="newGroupName">Nama kelompok</label><input id="newGroupName" maxlength="70" required placeholder="Contoh: Halaqah Al-Kahfi"></div>
+            <div><label for="newGroupDescription">Deskripsi</label><input id="newGroupDescription" maxlength="180" required placeholder="Tujuan dan kebiasaan kelompok"></div>
+          </div>
+          <div class="dashboard-form-actions">
+            <button class="dashboard-button dashboard-button--small" type="submit">Buat dan buka</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+        <form class="dashboard-inline-form" id="joinGroupForm" hidden>
+          <h3>Gabung dengan kode</h3>
+          <label for="joinCodeInput">Kode undangan kelompok</label>
+          <div class="dashboard-form-row"><input id="joinCodeInput" maxlength="24" required placeholder="AYAT-XXXX"><button class="dashboard-button dashboard-button--small" type="submit">Gabung</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+          <p class="dashboard-small-muted">Kode hanya bisa ditemukan pada kelompok yang tersimpan di browser ini.</p>
+        </form>
+        <form class="dashboard-inline-form" id="editGroupForm" hidden>
+          <h3>Edit informasi kelompok</h3>
+          <div class="group-form-grid">
+            <div><label for="editGroupName">Nama kelompok</label><input id="editGroupName" maxlength="70" required></div>
+            <div><label for="editGroupDescription">Deskripsi</label><input id="editGroupDescription" maxlength="180" required></div>
+          </div>
+          <div class="dashboard-form-actions">
+            <button class="dashboard-button dashboard-button--small" type="submit">Simpan info</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-members-panel" aria-labelledby="membersTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">KAWAN SEPERJALANAN</span><h2 id="membersTitle">Group Members</h2></div>
+          <button class="dashboard-icon-button" id="addMemberToggle" type="button" aria-label="Tambah anggota" aria-controls="addMemberForm" aria-expanded="false"><i class="bi bi-person-plus" aria-hidden="true"></i></button>
+        </div>
+        <ul class="group-member-list" id="memberList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="addMemberForm" hidden>
+          <div class="group-form-grid">
+            <div><label for="memberNameInput">Nama anggota</label><input id="memberNameInput" maxlength="50" required></div>
+            <div><label for="memberRoleInput">Peran</label><select id="memberRoleInput"><option>Anggota</option><option>Mentor</option><option>Ketua</option></select></div>
+          </div>
+          <div class="dashboard-form-actions"><button class="dashboard-button dashboard-button--small" type="submit">Tambah anggota</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-shared-goals-panel" aria-labelledby="sharedGoalsTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">SATU TARGET, SATU SEMANGAT</span><h2 id="sharedGoalsTitle">Shared Learning Goals</h2></div>
+          <button class="dashboard-icon-button" id="sharedGoalsToggle" type="button" aria-label="Atur target kelompok" aria-controls="sharedGoalsForm" aria-expanded="false"><i class="bi bi-sliders" aria-hidden="true"></i></button>
+        </div>
+        <div class="group-shared-goal">
+          <div class="daily-goal-heading"><span><i class="bi bi-book" aria-hidden="true"></i> Membaca bersama</span><strong><span id="sharedReadingDone">0</span>/<span id="sharedReadingTarget">0</span> ayat</strong></div>
+          <div class="dashboard-meter dashboard-meter--small" role="progressbar" aria-label="Progres target membaca kelompok" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="sharedReadingMeter"><span id="sharedReadingBar"></span></div>
+          <button class="dashboard-quiet-button group-goal-action" type="button" data-shared-goal="reading"><i class="bi bi-plus-circle" aria-hidden="true"></i> Catat kontribusi</button>
+        </div>
+        <div class="group-shared-goal">
+          <div class="daily-goal-heading"><span><i class="bi bi-stars" aria-hidden="true"></i> Menghafal bersama</span><strong><span id="sharedMemorizingDone">0</span>/<span id="sharedMemorizingTarget">0</span> ayat</strong></div>
+          <div class="dashboard-meter dashboard-meter--small" role="progressbar" aria-label="Progres target menghafal kelompok" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="sharedMemorizingMeter"><span id="sharedMemorizingBar"></span></div>
+          <button class="dashboard-quiet-button group-goal-action" type="button" data-shared-goal="memorizing"><i class="bi bi-plus-circle" aria-hidden="true"></i> Catat kontribusi</button>
+        </div>
+        <form class="dashboard-inline-form" id="sharedGoalsForm" hidden>
+          <div class="group-form-grid">
+            <div><label for="sharedReadingTargetInput">Target membaca (ayat)</label><input id="sharedReadingTargetInput" type="number" min="1" max="100000" required></div>
+            <div><label for="sharedMemorizingTargetInput">Target menghafal (ayat)</label><input id="sharedMemorizingTargetInput" type="number" min="1" max="100000" required></div>
+          </div>
+          <div class="dashboard-form-actions"><button class="dashboard-button dashboard-button--small" type="submit">Simpan target</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-activities-panel" aria-labelledby="activitiesTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">KABAR KELOMPOK</span><h2 id="activitiesTitle">Group Activities</h2></div>
+          <button class="dashboard-icon-button" id="activityToggle" type="button" aria-label="Tambah aktivitas kelompok" aria-controls="activityForm" aria-expanded="false"><i class="bi bi-plus-lg" aria-hidden="true"></i></button>
+        </div>
+        <ul class="dashboard-activity-list" id="groupActivityList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="activityForm" hidden>
+          <label for="activityInput">Aktivitas kelompok</label>
+          <div class="dashboard-form-row"><input id="activityInput" maxlength="120" required placeholder="Contoh: Sesi tilawah bersama"><button class="dashboard-button dashboard-button--small" type="submit">Catat aktivitas</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-murajaah-panel" aria-labelledby="groupMurajaahTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">MENJAGA HAFALAN BERSAMA</span><h2 id="groupMurajaahTitle">Group Murajaah</h2></div>
+          <button class="dashboard-icon-button" id="murajaahToggle" type="button" aria-label="Jadwalkan murajaah bersama" aria-controls="murajaahForm" aria-expanded="false"><i class="bi bi-calendar-plus" aria-hidden="true"></i></button>
+        </div>
+        <ul class="dashboard-item-list" id="murajaahList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="murajaahForm" hidden>
+          <div class="group-form-grid">
+            <div><label for="murajaahTitleInput">Materi murajaah</label><input id="murajaahTitleInput" maxlength="100" required placeholder="Contoh: Murajaah Juz 30"></div>
+            <div><label for="murajaahDateInput">Tanggal</label><input id="murajaahDateInput" type="date" required></div>
+            <div><label for="murajaahTimeInput">Waktu</label><input id="murajaahTimeInput" type="time" required></div>
+          </div>
+          <div class="dashboard-form-actions"><button class="dashboard-button dashboard-button--small" type="submit">Jadwalkan</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-ziyadah-panel" aria-labelledby="groupZiyadahTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">HAFALAN BARU ANGGOTA</span><h2 id="groupZiyadahTitle">Group Ziyadah</h2></div>
+          <button class="dashboard-icon-button" id="ziyadahTargetToggle" type="button" aria-label="Atur target ziyadah anggota" aria-controls="ziyadahTargetForm" aria-expanded="false"><i class="bi bi-bullseye" aria-hidden="true"></i></button>
+        </div>
+        <ul class="group-ziyadah-list" id="groupZiyadahList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="ziyadahTargetForm" hidden>
+          <div class="group-form-grid">
+            <div><label for="ziyadahMemberSelect">Anggota</label><select id="ziyadahMemberSelect" required></select></div>
+            <div><label for="ziyadahMemberTarget">Target baru (ayat)</label><input id="ziyadahMemberTarget" type="number" min="1" max="1000" required></div>
+          </div>
+          <div class="dashboard-form-actions"><button class="dashboard-button dashboard-button--small" type="submit">Simpan target</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-discussion-panel" aria-labelledby="discussionTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">SALING MENYAPA DAN BERBAGI</span><h2 id="discussionTitle">Discussion Room</h2></div>
+          <span class="dashboard-panel-icon"><i class="bi bi-chat-heart" aria-hidden="true"></i></span>
+        </div>
+        <ol class="group-discussion-list" id="discussionList" role="log" aria-live="polite" aria-relevant="additions"></ol>
+        <form class="group-message-form" id="discussionForm">
+          <label class="dashboard-muted" for="discussionInput">Pesan untuk kelompok</label>
+          <textarea id="discussionInput" rows="2" maxlength="500" required placeholder="Tulis pesan yang membangun..."></textarea>
+          <div class="dashboard-form-actions"><button class="dashboard-button dashboard-button--small" type="submit"><i class="bi bi-send" aria-hidden="true"></i> Kirim pesan</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-leaderboard-panel" aria-labelledby="leaderboardTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">APRESIASI USAHA BERSAMA</span><h2 id="leaderboardTitle">Group Leaderboard</h2></div>
+          <span class="dashboard-panel-icon"><i class="bi bi-trophy" aria-hidden="true"></i></span>
+        </div>
+        <p class="dashboard-small-muted">Poin berasal dari kontribusi target bersama dan ziyadah.</p>
+        <ol class="group-leaderboard-list" id="leaderboardList" aria-live="polite"></ol>
+      </section>
+
+      <section class="dashboard-panel group-calendar-panel" aria-labelledby="calendarTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">AGENDA KELOMPOK</span><h2 id="calendarTitle">Group Calendar</h2></div>
+          <button class="dashboard-icon-button" id="calendarToggle" type="button" aria-label="Tambah jadwal kelompok" aria-controls="calendarForm" aria-expanded="false"><i class="bi bi-calendar-plus" aria-hidden="true"></i></button>
+        </div>
+        <ul class="dashboard-item-list" id="calendarList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="calendarForm" hidden>
+          <div class="group-form-grid">
+            <div><label for="eventTitleInput">Nama kegiatan</label><input id="eventTitleInput" maxlength="100" required placeholder="Contoh: Halaqah pekanan"></div>
+            <div><label for="eventTypeInput">Jenis kegiatan</label><select id="eventTypeInput"><option>Halaqah</option><option>Setoran</option><option>Murajaah</option><option>Kegiatan</option></select></div>
+            <div><label for="eventDateInput">Tanggal</label><input id="eventDateInput" type="date" required></div>
+            <div><label for="eventTimeInput">Waktu</label><input id="eventTimeInput" type="time" required></div>
+          </div>
+          <div class="dashboard-form-actions"><button class="dashboard-button dashboard-button--small" type="submit">Tambah jadwal</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-challenges-panel" aria-labelledby="challengesTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">TANTANGAN KEKOMPAKAN</span><h2 id="challengesTitle">Group Challenges</h2></div>
+          <button class="dashboard-icon-button" id="challengeToggle" type="button" aria-label="Tambah tantangan kelompok" aria-controls="challengeForm" aria-expanded="false"><i class="bi bi-plus-lg" aria-hidden="true"></i></button>
+        </div>
+        <ul class="group-challenge-list" id="challengeList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="challengeForm" hidden>
+          <div class="group-form-grid">
+            <div><label for="challengeTitleInput">Nama tantangan</label><input id="challengeTitleInput" maxlength="100" required placeholder="Contoh: 7 hari membaca bersama"></div>
+            <div><label for="challengeTargetInput">Target (ayat)</label><input id="challengeTargetInput" type="number" min="1" max="100000" required></div>
+          </div>
+          <div class="dashboard-form-actions"><button class="dashboard-button dashboard-button--small" type="submit">Buat tantangan</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-notes-panel" aria-labelledby="sharedNotesTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">MATERI YANG DIBAGIKAN</span><h2 id="sharedNotesTitle">Shared Notes</h2></div>
+          <button class="dashboard-icon-button" id="sharedNoteToggle" type="button" aria-label="Tambah catatan bersama" aria-controls="sharedNoteForm" aria-expanded="false"><i class="bi bi-journal-plus" aria-hidden="true"></i></button>
+        </div>
+        <ul class="group-shared-notes-list" id="sharedNotesList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="sharedNoteForm" hidden>
+          <label for="sharedNoteTitleInput">Judul catatan</label>
+          <input id="sharedNoteTitleInput" maxlength="80" required placeholder="Contoh: Catatan hukum tajwid">
+          <label for="sharedNoteBodyInput">Isi catatan</label>
+          <textarea id="sharedNoteBodyInput" rows="3" maxlength="700" required></textarea>
+          <div class="dashboard-form-actions"><button class="dashboard-button dashboard-button--small" type="submit">Bagikan catatan</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-announcements-panel" aria-labelledby="announcementTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">INFORMASI PENTING</span><h2 id="announcementTitle">Group Announcement</h2></div>
+          <span class="dashboard-panel-icon"><i class="bi bi-megaphone" aria-hidden="true"></i></span>
+        </div>
+        <ul class="group-announcement-list" id="announcementList" aria-live="polite"></ul>
+        <p id="announcementPermission" class="dashboard-small-muted" hidden>Hanya ketua atau mentor kelompok yang dapat membuat pengumuman.</p>
+        <button class="dashboard-quiet-button dashboard-button--small" id="announcementToggle" type="button" aria-controls="announcementForm" aria-expanded="false"><i class="bi bi-plus-lg" aria-hidden="true"></i> Buat pengumuman</button>
+        <form class="dashboard-inline-form" id="announcementForm" hidden>
+          <label for="announcementHeadingInput">Judul pengumuman</label>
+          <input id="announcementHeadingInput" maxlength="90" required>
+          <label for="announcementBodyInput">Pesan</label>
+          <textarea id="announcementBodyInput" rows="3" maxlength="500" required></textarea>
+          <div class="dashboard-form-actions"><button class="dashboard-button dashboard-button--small" type="submit">Terbitkan</button><button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button></div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel group-reports-panel" aria-labelledby="reportsTitle">
+        <div class="dashboard-panel-heading">
+          <div><span class="dashboard-panel-kicker">RINGKASAN PERJALANAN</span><h2 id="reportsTitle">Group Reports</h2></div>
+          <button class="dashboard-button dashboard-button--small" id="downloadReport" type="button"><i class="bi bi-download" aria-hidden="true"></i> Unduh laporan</button>
+        </div>
+        <div class="group-report-stats" id="groupReportStats"></div>
+        <p id="groupReportSummary" class="dashboard-muted"></p>
+      </section>
+    </div>
+    <p class="dashboard-storage-note"><i class="bi bi-shield-lock" aria-hidden="true"></i> Data kelompok, diskusi, dan catatan tersimpan di browser ini; belum tersinkron antarperangkat.</p>
+  </main>
+  <script src="assets/group-learning.js"></script>
+</body>
+</html>

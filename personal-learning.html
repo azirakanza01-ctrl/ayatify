@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard belajar Al-Qur'an personal AyatIfy.">
+  <title>Personal Learning &mdash; AyatIfy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="assets/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="assets/style.css" rel="stylesheet">
+  <link href="assets/dashboard.css?v=2" rel="stylesheet">
+</head>
+<body class="learning-dashboard" data-theme="light">
+  <header class="dashboard-topbar">
+    <div class="dashboard-wrap dashboard-topbar-inner">
+      <a class="hw-logo dashboard-logo" href="index.html#home" aria-label="AyatIfy beranda">
+        <span class="hw-logo-mark"><i class="bi bi-book-half"></i></span>
+        Ayat<span class="dot">Ify</span>
+      </a>
+      <div class="dashboard-topbar-actions">
+        <div class="dashboard-clock" aria-label="Tanggal dan waktu saat ini">
+          <i class="bi bi-calendar3" aria-hidden="true"></i>
+          <div>
+            <span id="dashboardDate">Memuat tanggal...</span>
+            <strong id="dashboardTime">--:--:--</strong>
+          </div>
+        </div>
+        <button class="dashboard-theme-toggle" id="themeToggle" type="button" aria-pressed="false">
+          <i class="bi bi-moon-stars" aria-hidden="true"></i>
+          <span>Mode gelap</span>
+        </button>
+        <a class="dashboard-back-link" href="index.html#learn"><i class="bi bi-arrow-left" aria-hidden="true"></i> Kembali ke Learn</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-wrap dashboard-main">
+    <div id="dashboardNotice" class="dashboard-notice" role="status" aria-live="polite" hidden></div>
+
+    <section class="dashboard-welcome" aria-labelledby="welcomeTitle">
+      <div class="dashboard-welcome-copy">
+        <span class="dashboard-eyebrow"><i class="bi bi-stars" aria-hidden="true"></i> PERSONAL LEARNING</span>
+        <h1 id="welcomeTitle"><span id="greeting">Assalamu'alaikum</span>, <span id="userName">Sahabat Qur'an</span></h1>
+        <p id="dailyMotivation" class="dashboard-motivation">Satu ayat yang dipelajari dengan sungguh-sungguh adalah langkah yang berarti.</p>
+        <button class="dashboard-text-button" id="editNameToggle" type="button" aria-controls="nameForm" aria-expanded="false"><i class="bi bi-pencil" aria-hidden="true"></i> Ubah nama</button>
+        <form class="dashboard-inline-form name-form" id="nameForm" hidden>
+          <label for="nameInput">Nama sapaan</label>
+          <div class="dashboard-form-row">
+            <input id="nameInput" name="name" type="text" maxlength="40" autocomplete="given-name" required>
+            <button class="dashboard-button dashboard-button--small" type="submit">Simpan</button>
+            <button class="dashboard-quiet-button dashboard-button--small" id="cancelNameEdit" type="button">Batal</button>
+          </div>
+        </form>
+      </div>
+      <div class="dashboard-welcome-art" aria-hidden="true">
+        <span class="welcome-orbit welcome-orbit--one"></span>
+        <span class="welcome-orbit welcome-orbit--two"></span>
+        <span class="welcome-book"><i class="bi bi-book-half"></i></span>
+        <span class="welcome-spark welcome-spark--one"><i class="bi bi-stars"></i></span>
+        <span class="welcome-spark welcome-spark--two"><i class="bi bi-flower1"></i></span>
+      </div>
+    </section>
+
+    <div class="dashboard-grid">
+      <section class="dashboard-panel progress-panel" aria-labelledby="progressTitle">
+        <div class="dashboard-panel-heading">
+          <div>
+            <span class="dashboard-panel-kicker">PERJALANAN SAYA</span>
+            <h2 id="progressTitle">My Quran Progress</h2>
+          </div>
+          <button class="dashboard-icon-button" id="editProgressToggle" type="button" aria-label="Atur progres Al-Qur'an" aria-controls="progressForm" aria-expanded="false">
+            <i class="bi bi-pencil-square" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="quran-metrics">
+          <div class="quran-metric">
+            <strong id="progressJuz">0</strong>
+            <span>Juz</span>
+          </div>
+          <div class="quran-metric">
+            <strong id="progressSurah">0</strong>
+            <span>Surah</span>
+          </div>
+          <div class="quran-metric">
+            <strong id="progressAyat">0</strong>
+            <span>Ayat</span>
+          </div>
+        </div>
+        <form class="dashboard-inline-form" id="progressForm" hidden>
+          <div class="dashboard-input-grid">
+            <div><label for="progressJuzInput">Juz</label><input id="progressJuzInput" type="number" min="0" max="30" required></div>
+            <div><label for="progressSurahInput">Surah</label><input id="progressSurahInput" type="number" min="0" max="114" required></div>
+            <div><label for="progressAyatInput">Ayat</label><input id="progressAyatInput" type="number" min="0" max="6236" required></div>
+          </div>
+          <div class="dashboard-form-actions">
+            <button class="dashboard-button dashboard-button--small" type="submit">Simpan progres</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel continue-panel" aria-labelledby="continueTitle">
+        <div class="dashboard-panel-heading">
+          <div>
+            <span class="dashboard-panel-kicker">LANJUTKAN PERJALANAN</span>
+            <h2 id="continueTitle">Continue Learning</h2>
+          </div>
+          <span class="dashboard-panel-icon"><i class="bi bi-bookmark-heart" aria-hidden="true"></i></span>
+        </div>
+        <div class="continue-content">
+          <div class="continue-book-icon"><i class="bi bi-book-half" aria-hidden="true"></i></div>
+          <div class="continue-copy">
+            <span class="dashboard-muted">Terakhir dipelajari</span>
+            <strong id="continueLocation">Al-Baqarah, ayat 120</strong>
+            <span id="continueUpdated" class="dashboard-small-muted">Mulai perjalanan belajarmu hari ini.</span>
+          </div>
+          <button class="dashboard-button" id="continueToggle" type="button" aria-controls="continueForm" aria-expanded="false"><i class="bi bi-play-fill" aria-hidden="true"></i> Lanjutkan</button>
+        </div>
+        <form class="dashboard-inline-form" id="continueForm" hidden>
+          <p class="dashboard-form-intro">Catat lokasi terakhir setelah melanjutkan sesi belajar.</p>
+          <div class="dashboard-input-grid dashboard-input-grid--continue">
+            <div><label for="continueSurahInput">Nama surah</label><input id="continueSurahInput" type="text" maxlength="60" required></div>
+            <div><label for="continueAyatInput">Ayat terakhir</label><input id="continueAyatInput" type="number" min="1" max="6236" required></div>
+          </div>
+          <div class="dashboard-form-actions">
+            <button class="dashboard-button dashboard-button--small" type="submit">Simpan sesi</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel murajaah-panel" aria-labelledby="murajaahTitle">
+        <div class="dashboard-panel-heading">
+          <div>
+            <span class="dashboard-panel-kicker">JAGA HAFALAN</span>
+            <h2 id="murajaahTitle">Murajaah Overview</h2>
+          </div>
+          <button class="dashboard-icon-button" id="addReviewToggle" type="button" aria-label="Tambah hafalan untuk murajaah" aria-controls="reviewForm" aria-expanded="false">
+            <i class="bi bi-plus-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+        <ul class="dashboard-item-list" id="reviewList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="reviewForm" hidden>
+          <div class="dashboard-input-grid dashboard-input-grid--review">
+            <div><label for="reviewSurahInput">Nama surah</label><input id="reviewSurahInput" type="text" maxlength="60" required></div>
+            <div><label for="reviewRangeInput">Rentang ayat</label><input id="reviewRangeInput" type="text" maxlength="24" placeholder="1-7" required></div>
+          </div>
+          <div class="dashboard-form-actions">
+            <button class="dashboard-button dashboard-button--small" type="submit">Tambah daftar</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel ziyadah-panel" aria-labelledby="ziyadahTitle">
+        <div class="dashboard-panel-heading">
+          <div>
+            <span class="dashboard-panel-kicker">TAMBAH HAFALAN</span>
+            <h2 id="ziyadahTitle">Ziyadah Progress</h2>
+          </div>
+          <span class="dashboard-panel-icon"><i class="bi bi-journal-plus" aria-hidden="true"></i></span>
+        </div>
+        <div class="dashboard-progress-copy">
+          <strong><span id="ziyadahCompleted">0</span> <span class="dashboard-muted">/</span> <span id="ziyadahTarget">0</span> ayat</strong>
+          <span id="ziyadahPercent" class="dashboard-muted">0%</span>
+        </div>
+        <div class="dashboard-meter" role="progressbar" aria-label="Progres ziyadah" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="ziyadahMeter">
+          <span id="ziyadahBar"></span>
+        </div>
+        <div class="dashboard-action-row">
+          <button class="dashboard-button dashboard-button--small" id="addZiyadahAyat" type="button"><i class="bi bi-plus-lg" aria-hidden="true"></i> Tambah 1 ayat</button>
+          <button class="dashboard-quiet-button dashboard-button--small" id="ziyadahGoalToggle" type="button" aria-controls="ziyadahForm" aria-expanded="false">Atur target</button>
+        </div>
+        <form class="dashboard-inline-form" id="ziyadahForm" hidden>
+          <label for="ziyadahTargetInput">Target hafalan baru (ayat)</label>
+          <div class="dashboard-form-row">
+            <input id="ziyadahTargetInput" type="number" min="1" max="1000" required>
+            <button class="dashboard-button dashboard-button--small" type="submit">Simpan target</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel daily-goals-panel" aria-labelledby="dailyGoalsTitle">
+        <div class="dashboard-panel-heading">
+          <div>
+            <span class="dashboard-panel-kicker">LANGKAH KECIL SETIAP HARI</span>
+            <h2 id="dailyGoalsTitle">Daily Quran Goals</h2>
+          </div>
+          <button class="dashboard-icon-button" id="dailyGoalsToggle" type="button" aria-label="Atur target harian" aria-controls="dailyGoalsForm" aria-expanded="false">
+            <i class="bi bi-sliders" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="daily-goal">
+          <div class="daily-goal-heading">
+            <span><i class="bi bi-book" aria-hidden="true"></i> Membaca</span>
+            <strong><span id="readingDone">0</span>/<span id="readingTarget">0</span> ayat</strong>
+          </div>
+          <div class="dashboard-meter dashboard-meter--small" role="progressbar" aria-label="Target membaca hari ini" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="readingMeter"><span id="readingBar"></span></div>
+          <button class="dashboard-quiet-button daily-goal-action" type="button" data-goal="reading"><i class="bi bi-plus-circle" aria-hidden="true"></i> Catat 1 ayat</button>
+        </div>
+        <div class="daily-goal">
+          <div class="daily-goal-heading">
+            <span><i class="bi bi-stars" aria-hidden="true"></i> Menghafal</span>
+            <strong><span id="memorizingDone">0</span>/<span id="memorizingTarget">0</span> ayat</strong>
+          </div>
+          <div class="dashboard-meter dashboard-meter--small" role="progressbar" aria-label="Target menghafal hari ini" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="memorizingMeter"><span id="memorizingBar"></span></div>
+          <button class="dashboard-quiet-button daily-goal-action" type="button" data-goal="memorizing"><i class="bi bi-plus-circle" aria-hidden="true"></i> Catat 1 ayat</button>
+        </div>
+        <form class="dashboard-inline-form" id="dailyGoalsForm" hidden>
+          <div class="dashboard-input-grid">
+            <div><label for="readingTargetInput">Target membaca/ hari</label><input id="readingTargetInput" type="number" min="1" max="1000" required></div>
+            <div><label for="memorizingTargetInput">Target menghafal/ hari</label><input id="memorizingTargetInput" type="number" min="1" max="1000" required></div>
+          </div>
+          <div class="dashboard-form-actions">
+            <button class="dashboard-button dashboard-button--small" type="submit">Simpan target</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel upcoming-panel" aria-labelledby="upcomingTitle">
+        <div class="dashboard-panel-heading">
+          <div>
+            <span class="dashboard-panel-kicker">LANGKAH BERIKUTNYA</span>
+            <h2 id="upcomingTitle">Upcoming Goals</h2>
+          </div>
+          <button class="dashboard-icon-button" id="addGoalToggle" type="button" aria-label="Tambah target belajar" aria-controls="upcomingForm" aria-expanded="false">
+            <i class="bi bi-plus-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+        <ul class="dashboard-item-list" id="upcomingList" aria-live="polite"></ul>
+        <form class="dashboard-inline-form" id="upcomingForm" hidden>
+          <label for="upcomingTitleInput">Target belajar</label>
+          <input id="upcomingTitleInput" type="text" maxlength="100" placeholder="Contoh: Murajaah Juz 30" required>
+          <label for="upcomingDateInput">Tanggal target</label>
+          <div class="dashboard-form-row">
+            <input id="upcomingDateInput" type="date" required>
+            <button class="dashboard-button dashboard-button--small" type="submit">Tambah target</button>
+            <button class="dashboard-quiet-button dashboard-button--small" data-cancel-form type="button">Batal</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="dashboard-panel activities-panel" aria-labelledby="activitiesTitle">
+        <div class="dashboard-panel-heading">
+          <div>
+            <span class="dashboard-panel-kicker">JEJAK PERJALANAN</span>
+            <h2 id="activitiesTitle">Recent Activities</h2>
+          </div>
+          <span class="dashboard-panel-icon"><i class="bi bi-clock-history" aria-hidden="true"></i></span>
+        </div>
+        <ul class="dashboard-activity-list" id="activityList" aria-live="polite"></ul>
+      </section>
+
+      <section class="dashboard-panel notes-panel" aria-labelledby="notesTitle">
+        <div class="dashboard-panel-heading">
+          <div>
+            <span class="dashboard-panel-kicker">RUANG REFLEKSI</span>
+            <h2 id="notesTitle">Personal Notes</h2>
+          </div>
+          <span class="dashboard-panel-icon"><i class="bi bi-journal-text" aria-hidden="true"></i></span>
+        </div>
+        <form id="notesForm">
+          <label class="dashboard-muted" for="notesInput">Catat pelajaran, ayat, atau refleksi hari ini.</label>
+          <textarea id="notesInput" rows="5" maxlength="2000" placeholder="Apa yang ingin kamu ingat dari sesi mengaji hari ini?"></textarea>
+          <div class="dashboard-notes-footer">
+            <span id="notesSaved" class="dashboard-small-muted">Catatan tersimpan di perangkat ini.</span>
+            <button class="dashboard-button dashboard-button--small" type="submit"><i class="bi bi-check2" aria-hidden="true"></i> Simpan catatan</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <p class="dashboard-storage-note"><i class="bi bi-shield-lock" aria-hidden="true"></i> Data awal adalah contoh. Perubahan disimpan di browser ini dan tidak disinkronkan ke perangkat lain.</p>
+  </main>
+
+  <script src="assets/personal-learning.js"></script>
+</body>
+</html>
